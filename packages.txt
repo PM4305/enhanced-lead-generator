@@ -1,5 +1,4 @@
 chromium
-chromium-driver
 libnss3
 libnspr4
 libatk1.0-0
@@ -12,3 +11,10 @@ libxrandr2
 libgbm1
 libxss1
 libasound2
+libx11-6
+libxext6
+libxfixes3
+libxcursor1
+libxrender1
+libxtst6
+libxi6
