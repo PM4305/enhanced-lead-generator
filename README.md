@@ -23,7 +23,7 @@ playwright install chromium  # Install browser for advanced scraping
 streamlit run lead_generator.py
 ```
 
-**🎬 [Watch 2-Minute Demo](docs/video_demo.mp4)** | **📄 [Technical Report](PROJECT_REPORT.md)**
+**🎬 [Watch 2-Minute Demo](docs/video_demo.mp4)** | **📄 [Technical Report](Project_Report.md)**
 
 ---
 
