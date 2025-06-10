@@ -4,7 +4,7 @@
 **Author:** Prakhar Madnani | B.Tech IT Student, JIIT (9.1 CGPA)
 
 [![Demo Video](https://img.shields.io/badge/Demo-Video-red)](docs/video_demo.mp4)
-[![Technical Report](https://img.shields.io/badge/Technical-Report-blue)](PROJECT_REPORT.md)
+[![Technical Report](https://img.shields.io/badge/Technical-Report-blue)](Project_Report.md)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue)]()
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red)]()
 [![Playwright](https://img.shields.io/badge/Playwright-Enabled-green)]()
