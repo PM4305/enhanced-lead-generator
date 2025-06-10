@@ -9,26 +9,17 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red)]()
 [![Playwright](https://img.shields.io/badge/Playwright-Enabled-green)]()
 
-> **🎯 Try the live demo now:** [enhanced-lead-generator.streamlit.app](https://enhanced-lead-generator.streamlit.app/)
-
 > **Intelligent B2B lead generation tool combining AI-driven scoring algorithms, advanced web scraping with Playwright, and enterprise-grade analytics for superior lead qualification.**
 
 ---
 
-## 🚀 **Quick Start Options**
+## 🚀 **Quick Start**
 
-### **Option 1: Try Live Demo (Recommended)**
-👉 **[Launch Live App](https://enhanced-lead-generator.streamlit.app/)**
-- No installation required
-- Test with sample domains
-- Experience both Standard and Enhanced modes
-
-### **Option 2: Local Installation**
 ```bash
-git clone https://github.com/prakhar-madnani/enhanced-lead-generator.git
+git clone https://github.com/PM4305/enhanced-lead-generator.git
 cd enhanced-lead-generator
 pip install -r requirements.txt
-playwright install chromium  # For enhanced features
+playwright install chromium  # Install browser for advanced scraping
 streamlit run lead_generator.py
 ```
 

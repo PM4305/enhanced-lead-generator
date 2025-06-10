@@ -12,56 +12,6 @@ from dataclasses import dataclass
 from email_validator import validate_email, EmailNotValidError
 import asyncio
 import platform
-import streamlit as st
-import os
-import subprocess
-import time
-from pathlib import Path
-import sys
-
-def setup_playwright_python312():
-    
-    is_cloud = any([
-        os.getenv('STREAMLIT_CLOUD'),
-        'streamlit.app' in os.getenv('HOSTNAME', ''),
-        '/mount/src' in os.getcwd(),
-        os.path.exists('/mount/src')
-    ])
-    
-    if not is_cloud:
-        try:
-            from playwright.sync_api import sync_playwright
-            return True
-        except ImportError:
-            return False
-    
-    install_marker = Path('/tmp/playwright_python312_ready')
-    
-    if install_marker.exists():
-        return True
-    
-    try:
-        with st.spinner("🔧 Setting up enhanced web scraping (Python 3.12.5)..."):
-            result = subprocess.run([
-                'playwright', 'install', 'chromium'
-            ], capture_output=True, text=True, timeout=180)
-            
-            if result.returncode == 0:
-                install_marker.write_text('success')
-                st.success("✅ Enhanced mode activated!")
-                return True
-            else:
-                st.info("ℹ️ Using standard mode")
-                return False
-                
-    except Exception:
-        st.info("ℹ️ Using standard mode")
-        return False
-
-if 'playwright_available' not in st.session_state:
-    st.session_state.playwright_available = setup_playwright_python312()
-
-PLAYWRIGHT_AVAILABLE = st.session_state.playwright_available
 
 if platform.system() == 'Windows':
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
