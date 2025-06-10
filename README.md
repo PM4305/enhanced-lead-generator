@@ -9,17 +9,26 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red)]()
 [![Playwright](https://img.shields.io/badge/Playwright-Enabled-green)]()
 
+> **🎯 Try the live demo now:** [enhanced-lead-generator.streamlit.app](https://enhanced-lead-generator.streamlit.app/)
+
 > **Intelligent B2B lead generation tool combining AI-driven scoring algorithms, advanced web scraping with Playwright, and enterprise-grade analytics for superior lead qualification.**
 
 ---
 
-## 🚀 **Quick Start**
+## 🚀 **Quick Start Options**
 
+### **Option 1: Try Live Demo (Recommended)**
+👉 **[Launch Live App](https://enhanced-lead-generator.streamlit.app/)**
+- No installation required
+- Test with sample domains
+- Experience both Standard and Enhanced modes
+
+### **Option 2: Local Installation**
 ```bash
 git clone https://github.com/prakhar-madnani/enhanced-lead-generator.git
 cd enhanced-lead-generator
 pip install -r requirements.txt
-playwright install chromium  # Install browser for advanced scraping
+playwright install chromium  # For enhanced features
 streamlit run lead_generator.py
 ```
 
@@ -87,13 +96,13 @@ Enable in sidebar: **🚀 Use Playwright (JavaScript Sites)**
 ## 🏗️ **Technical Architecture**
 
 ```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Input Layer   │    │ Processing Layer │    │  Output Layer   │
-│                 │    │                  │    │                 │
-│ • Single Domain │────│ • Playwright     │────│ • Streamlit UI  │
-│ • Bulk Upload   │    │ • BeautifulSoup  │    │ • Analytics     │
+┌─────────────────┐    ┌───────────────────┐    ┌─────────────────┐
+│   Input Layer   │    │ Processing Layer  │    │  Output Layer   │
+│                 │    │                   │    │                 │
+│ • Single Domain │────│ • Playwright      │────│ • Streamlit UI  │
+│ • Bulk Upload   │    │ • BeautifulSoup   │    │ • Analytics     │
 │ • CSV Import    │    │ • Email Validation│    │ • Export Modes  │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
+└─────────────────┘    └───────────────────┘    └─────────────────┘
 ```
 
 ### **Core Components**
@@ -214,7 +223,7 @@ def calculate_confidence_score(lead_data):
 
 1. **Clone Repository**
 ```bash
-git clone https://github.com/prakhar-madnani/enhanced-lead-generator.git
+git clone https://github.com/PM4305/enhanced-lead-generator.git
 cd enhanced-lead-generator
 ```
 
@@ -285,7 +294,7 @@ python demo.py
 
 | Results Table | Export Options | Playwright Comparison |
 |---|---|---|
-| ![Results](screenshots/03_results.png) | ![Export](screenshots/05_export.png) | ![Comparison](screenshots/06_playwright_comparison.png) |
+| ![Results](screenshots/03_results.png) | ![Export](screenshots/05_export.png) |
 
 ---
 
@@ -393,7 +402,7 @@ This project was developed for the Caprae Capital AI-Readiness Challenge. Educat
 **Ready to try it out?**
 
 ```bash
-git clone https://github.com/prakhar-madnani/enhanced-lead-generator.git
+git clone https://github.com/PM4305/enhanced-lead-generator.git
 cd enhanced-lead-generator
 pip install -r requirements.txt
 streamlit run lead_generator.py
@@ -411,7 +420,7 @@ playwright install chromium
 
 **Built with ❤️ for the Caprae Capital Internship Challenge**
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/prakhar-madnani/enhanced-lead-generator)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/PM4305/enhanced-lead-generator)
 [![Demo](https://img.shields.io/badge/Live-Demo-blue)](docs/video_demo.mp4)
 [![Report](https://img.shields.io/badge/Technical-Report-green)](PROJECT_REPORT.md)
 
