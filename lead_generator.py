@@ -12,6 +12,139 @@ from dataclasses import dataclass
 from email_validator import validate_email, EmailNotValidError
 import asyncio
 import platform
+import streamlit as st
+import os
+import subprocess
+import time
+from pathlib import Path
+
+class CloudPlaywrightManager:
+    """Manages Playwright installation and availability on cloud platforms"""
+    
+    def __init__(self):
+        self.is_cloud = self._detect_cloud_environment()
+        self.playwright_available = False
+        self._setup_playwright()
+    
+    def _detect_cloud_environment(self):
+        """Detect if running on Streamlit Cloud"""
+        cloud_indicators = [
+            os.getenv('STREAMLIT_CLOUD'),
+            'streamlit.app' in os.getenv('HOSTNAME', ''),
+            '/mount/src' in os.getcwd(),
+            os.path.exists('/mount/src')
+        ]
+        return any(cloud_indicators)
+    
+    def _setup_playwright(self):
+        """Set up Playwright with intelligent fallback"""
+        if not self.is_cloud:
+            # Local development
+            try:
+                from playwright.sync_api import sync_playwright
+                self.playwright_available = True
+                st.success("🚀 Enhanced mode available (Playwright)")
+            except ImportError:
+                st.info("ℹ️ Standard mode (BeautifulSoup) - Install Playwright for enhanced features")
+        else:
+            # Cloud environment
+            self.playwright_available = self._install_cloud_playwright()
+    
+    def _install_cloud_playwright(self):
+        """Install Playwright browsers on cloud platform"""
+        
+        # Check installation cache
+        cache_file = Path('/tmp/playwright_status')
+        if cache_file.exists():
+            status = cache_file.read_text().strip()
+            if status == 'success':
+                st.success("🚀 Enhanced mode active (Playwright)")
+                return True
+            elif status == 'failed':
+                st.info("ℹ️ Standard mode active (BeautifulSoup)")
+                return False
+        
+        # First-time installation
+        with st.spinner("🔧 Setting up enhanced web scraping capabilities..."):
+            try:
+                # Method 1: Direct installation
+                result1 = subprocess.run([
+                    'playwright', 'install', 'chromium', '--with-deps'
+                ], capture_output=True, text=True, timeout=120)
+                
+                if result1.returncode == 0:
+                    cache_file.write_text('success')
+                    st.success("🎉 Enhanced mode activated!")
+                    return True
+                
+                # Method 2: Python module installation
+                result2 = subprocess.run([
+                    'python', '-m', 'playwright', 'install', 'chromium'
+                ], capture_output=True, text=True, timeout=120)
+                
+                if result2.returncode == 0:
+                    cache_file.write_text('success')
+                    st.success("🎉 Enhanced mode activated!")
+                    return True
+                
+                # Method 3: Minimal installation
+                result3 = subprocess.run([
+                    'playwright', 'install-deps'
+                ], capture_output=True, text=True, timeout=60)
+                
+                subprocess.run([
+                    'playwright', 'install', 'chromium'
+                ], capture_output=True, text=True, timeout=60)
+                
+                cache_file.write_text('success')
+                st.success("🎉 Enhanced mode activated!")
+                return True
+                
+            except subprocess.TimeoutExpired:
+                st.warning("⚠️ Installation timeout - using standard mode")
+                cache_file.write_text('failed')
+                return False
+            except Exception as e:
+                st.info(f"ℹ️ Using standard mode: Enhanced features unavailable")
+                cache_file.write_text('failed')
+                return False
+    
+    def is_available(self):
+        """Check if Playwright is available"""
+        return self.playwright_available
+    
+    def get_extraction_method(self):
+        """Get current extraction method"""
+        return "Enhanced (Playwright)" if self.playwright_available else "Standard (BeautifulSoup)"
+
+# Initialize globally
+if 'playwright_manager' not in st.session_state:
+    st.session_state.playwright_manager = CloudPlaywrightManager()
+
+# Usage in your app:
+playwright_manager = st.session_state.playwright_manager
+PLAYWRIGHT_AVAILABLE = playwright_manager.is_available()
+
+# Update your sidebar to show current mode
+with st.sidebar:
+    st.info(f"🔧 **Current Mode:** {playwright_manager.get_extraction_method()}")
+    
+    if PLAYWRIGHT_AVAILABLE:
+        use_playwright = st.checkbox(
+            "🚀 Use Enhanced Mode",
+            value=True,
+            help="Playwright mode for JavaScript-heavy websites"
+        )
+    else:
+        use_playwright = False
+        st.info("💡 Enhanced mode requires Playwright installation")
+        
+        if st.button("🔄 Retry Enhanced Setup"):
+            # Clear cache and retry
+            cache_file = Path('/tmp/playwright_status')
+            if cache_file.exists():
+                cache_file.unlink()
+            st.rerun()
 
 if platform.system() == 'Windows':
     asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
